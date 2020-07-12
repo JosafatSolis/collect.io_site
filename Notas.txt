@@ -1,0 +1,117 @@
+Pasos pendientes:
+1. Crear el proyecto de Back para tenerlo listo
+2. Crear el proyecto del Site para tenerlo listo
+3. Definir vistas del Site para definir modelos
+4. Hacer unos registros simples
+5. Terminar el front de Remote para que cargue los formatos y guarde los registros
+6. Implementar los filtros básicos para recuperar los datos en el Site
+7. Implementar lo necesario en el back para que regrese los datos con el formato esperado y las estadísticas
+8. Implementar un grid que pueda guardar en Excel para la visualización de los datos
+
+Mostrar 2 ejemplos:
+• Registro de kilometraje diario + cargas de combustible
+• Deliveries de restaurante
+• Recepción de Materia Prima (1 código x material)
+
+De datos numéricos, mostrar:
+• Histograma
+• Media
+• Desv. Std
+• Suma
+• Suma x día
+• Líms de Ctrol
+• Gráfica de #Registros vs tiempo
+∘ x código
+• Tabla (descargar en excel)
+∘ Folio
+∘ Dato
+∘ Hr
+∘ Código* (Con el código se podría rastrear la persona / el origen...)
+∘ Otras columnas que tenga el formato
+
+--> Un formato puede tener distintos códigos
+--> Opcionales: Objetivo, Mínimo, Máximo, mejorSi: Alto - Bajo
+
+--> Tres secciones:
+	- Estadísticas
+	- Gráficas
+	- Tabla
+
+
+
+Pasos generales para iniciar app front:
+1. Instalar dependencias
+	- axios
+	- dotenv
+	- react-dom
+	- react-router-dom
+	- redux* (si es compleja la lógica)
+	- react-redux
+	- redux-thunk (si se van a manejar llamadas asyncronas)
+	- styled-components
+	- ui-kit *
+2. Agregar .gitignore
+3. Agregar .env
+4. Agregar Routes.js
+5. Agregar carpetas base:
+	- components y dentro common
+	- redux
+	- utils
+6. Agregar moduleAliases
+	- ~components: "./src/components"
+	- ~commons: "./src/components/common"
+	- ~redux: "./src/redux"
+	- ~utils: "./src/utils"
+7. Crear la base de los Ducks que se vayan a utilizar dentro de redux
+8. Crear el store
+9. En index.js
+	- importar e implementar:
+		- BrowserRouter
+		- Provider
+		- store (redux)
+		- uikit+icons
+10. Crear el App.js
+11. Crear el Routes.js
+12. Crear la carpeta services y crear un archivo por cada modelo del back
+13. Crear el archivo utils.js con las funciones de normalizeData, etc.
+
+W3bM4sT3rM@pP5
+
+
+
+
+** Breadcrumb ** --> Para indicar en dónde estamos
+** Accordion ** --> Para mostrar detalles de forma colapsable
+** Table, Striped ** --> Para mostrar detalles de los registros
+** Form ** --> Para llenar los datos en donde se requiera
+** Grid ** --> Para reacomodar los objetos según se requiera
+[Opcional] Sortable --> Grid que mantiene ordenados los elementos
+** Iconnav ** --> Comandos en el tab para adminsitrar el elemento (CRUD)
+** Leader ** --> Para llenar con .... entre dos elementos
+** List ** --> Para separar elementos en vertical
+** Modal ** --> Para mostrar mensajes de confirmación, etc.
+Nav / Accordion --> Para mostrar listas colapsables
+** Notification ** ---> Mensaje desplegable que se oculta en automático
+** Off-canvas ** --> Panel lateral deplegable y colapsable, para mostrar elementos grandes
+** Scrollspy ** --> (Fade) Hace que los cards vayan apareciendo conforme te vas desplazando hacia abajo
+** Spinner ** --> Spinner animado para operaciones largas
+** Tab ** --> Tab horizontal o vertical para separación de secciones
+** Toggle, queued animations ** --> Para cambiar el estatus del card, cinclue 
+
+
+
+** Breadcrumb ** --> Para indicar en dónde estamos
+** Accordion ** --> Para mostrar detalles de forma colapsable
+** Comment ** --> Para mostar detalle de las acciones
+** Table, Striped ** --> Para mostrar detalles de las acciones
+** Filter ** --> Para mostrar todos los items y poder filtrarlos de forma fácil
+** Form ** --> Para llenar los datos en donde se requiera
+** Sortable ** --> Grid que mantiene ordenados los elementos
+** Iconnav ** --> Comandos en el tab para adminsitrar el elemento (CRUD)
+** Leader ** --> Para llenar con .... entre dos elementos
+** List ** --> Para separar elementos en vertical
+** Nav / Accordion --> Para mostrar listas colapsables
+** Scrollspy ** --> (Fade) Hace que los cards vayan apareciendo conforme te vas desplazando hacia abajo
+** Toggle, queued animations ** --> Para cambiar el estatus del card, cinclue 
+
+
