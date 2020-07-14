@@ -1,10 +1,10 @@
 import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import thunk from "redux-thunk";
 
-import Session from "./SessionDuck";
-import Data from "./DataDuck";
+import session from "./SessionDuck";
+import data from "./DataDuck";
 
-const rootReducer = combineReducers({ Session, Data });
+const rootReducer = combineReducers({ session, data });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

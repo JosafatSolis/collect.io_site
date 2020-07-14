@@ -1,16 +1,19 @@
 // Imports
 
 // Actions
-const LOADING_PRODUCTS = "lab-redux/products/LOADING_PRODUCTS";
+const SET_USER = "collect.io/session/SET_USER";
 
 // State
-const initState = {}
+const initState = {
+  currentUser: JSON.parse(localStorage.getItem("currentUser")) || {}
+}
 
 // Reducer
 export default function reducer(state = initState, action) {
     switch (action.type) {
-        case LOADING_PRODUCTS:
-          return { ...state, }
+        case SET_USER:
+          localStorage.setItem("currentUser", JSON.stringify(action.payload));
+          return { ...state, currentUser: action.payload }
 
         default:
             return state;
@@ -18,15 +21,15 @@ export default function reducer(state = initState, action) {
 }
 
 // Action Creators
-export const loadingProducts = (payload) => ({
-  type: LOADING_PRODUCTS,
+export const setUser = (payload) => ({
+  type: SET_USER,
   payload,
 });
 
 // Thunks
 export const loadProducts = () => {
     return (dispatch) => {
-      dispatch(loadingProducts());
+    //  dispatch(loadingProducts());
     //   getProducts()
     //     .then((response) => {
     //       dispatch(getProductsSuccess(response.data));
