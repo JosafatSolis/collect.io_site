@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { checkIfEmptyOject } from "./utils/utils";
 import Routes from "./Routes";
 import "./App.css";
 
@@ -10,11 +11,9 @@ function App() {
 
   useEffect(() => {
     console.log(currentUser);
-    // Lee el usuario actual y si es nulo, manda al login /
-    if (!currentUser) {
+    if (checkIfEmptyOject(currentUser)) {
       history.push("/login");
     } else {
-      // Si el usuario ya existe, manda al home /home
       history.push("/home");
     }
   });
