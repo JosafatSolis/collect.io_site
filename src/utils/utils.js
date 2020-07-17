@@ -1,10 +1,6 @@
-export const normalizeProductsData = (data) => data.reduce((acc, product) => ({...acc, [product.id]: product}), {});
+export const normalizeArray = (array) => array.reduce((acc, item) => ({...acc, [item._id]: item}), {});
 
-export const denormalizeProductsData = (data) => Object.values(data);
-
-export const normalizeCartsData = (data) => data.reduce((acc, cart) => ({...acc, [cart.id]: cart}), {});
-
-export const denormalizeCartsData = (data) => Object.values(data);
+export const denormalizeArray = (arrayObject) => Object.values(arrayObject);
 
 export const checkIfEmptyOject = (obj) => {
     for(var key in obj) {
@@ -12,3 +8,19 @@ export const checkIfEmptyOject = (obj) => {
     }
     return true;
 }
+
+export const getSelectValues = (select) => {
+    console.log("Select", select);
+    var result = [];
+    var options = select && select.options;
+    var opt;
+  
+    for (var i=0, iLen=options.length; i<iLen; i++) {
+      opt = options[i];
+  
+      if (opt.selected) {
+        result.push(opt.value || opt.text);
+      }
+    }
+    return result;
+  }

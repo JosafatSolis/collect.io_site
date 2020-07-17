@@ -3,12 +3,10 @@ import axios from 'axios';
 import { base_url } from './baseUrl';
 axios.defaults.withCredentials = true;
 
-// Regresan promesas, se debe enviar el objeto COMPLETO, no con destructuring
-
-export const login = (data) => {
-    return axios.post(`${base_url}/login`, data);
+export const loginPost = (credentials) => {
+    return axios.post(`${base_url}/users/login`, credentials);
 }
 
-export const logout = () => {
-    return axios.post(`${base_url}/login/logout`);
+export const logoutPost = () => {
+    return axios.post(`${base_url}/users/logout`);
 }

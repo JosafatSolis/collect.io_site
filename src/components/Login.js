@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { login, clearErrorMsg } from "../redux/SessionDuck";
 import { useHistory, Link } from "react-router-dom";
 import styled from "styled-components";
 import { checkIfEmptyOject } from "../utils/utils";
-import { login } from "../services/loginServices";
 
 let logo = require("../assets/whitelogo.png");
 let background = require("../assets/loginbackground.svg");
@@ -13,15 +13,29 @@ const BackgroundSection = styled.section`
   background-size: cover;
 `;
 
+const ErrorMsg = styled.h3`
+  color: red;
+`;
+
 const Login = () => {
   const history = useHistory();
-  const currentUser = useSelector((state) => state.session.currentUser);
+  const dispatch = useDispatch();
+  const { currentUser, errorMsg } = useSelector((state) => state.session);
 
-  if (!checkIfEmptyOject(currentUser)) {
-    history.push("/home");
-  }
+  useEffect(() => {
+      if (!checkIfEmptyOject(currentUser)) {
+        history.push("/home");
+      }
+  }, [currentUser, history])
 
   const [credentials, setCredentials] = useState({});
+
+  const handleFocus = (e) => {
+    if (errorMsg) {
+      dispatch(clearErrorMsg());
+      credentials.password = "";
+    }
+  };
 
   const handleChange = (e) => {
     const key = e.target.name;
@@ -30,29 +44,11 @@ const Login = () => {
       ...prevState,
       [key]: value,
     }));
-    console.log(credentials);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Se extrae el método setUser del AppContext
-    const { setUser } = this.context;
-    const { credentials } = this.state;
-    const { history } = this.props;
-    // Mandamos llamar el servicio que regresa una promesa, que a su vez regrea un objeto res.data con el user dentro
-    login(credentials)
-      .then((res) => {
-        // Extrae el usuario y lo asigna al context, mediante el método setUser
-        const { user } = res.data;
-        setUser(user);
-        // Cambia la página dependiendo del rol del usuario logueado:
-        if (["Admin", "Tecnician"].includes(user.role)) {
-          history.push("home/tenants");
-        } else {
-          history.push(`home/tickets/${user.tenant._id}`);
-        }
-      })
-      .catch((reason) => console.log("Error", reason));
+    dispatch(login(credentials));
   };
 
   return (
@@ -91,6 +87,7 @@ const Login = () => {
               <input
                 name="email"
                 onChange={handleChange}
+                onFocus={handleFocus}
                 type="text"
                 placeholder="Email"
                 className="uk-width-1-2 uk-form-large uk-text-center"
@@ -102,12 +99,13 @@ const Login = () => {
                 <span
                   uk-icon="icon: lock; ratio: 2"
                   className="uk-margin-small-right"
-                >
-                  {" "}
-                </span>
+                ></span>
+
                 <input
                   name="password"
                   onChange={handleChange}
+                  onFocus={handleFocus}
+                  value={credentials.password || ""}
                   className="uk-margin-small-top uk-width-1-2 uk-form-large uk-text-center"
                   type="password"
                   placeholder="Password"
@@ -115,10 +113,12 @@ const Login = () => {
                 ></input>
               </div>
 
+              {errorMsg && <ErrorMsg>Login failed! Try again</ErrorMsg>}
+
               {/* LOGIN BUTTON */}
               <div className=" uk-align-center ">
                 <button
-                  className=" uk-align-center uk-button uk-button-primary"
+                  className="uk-align-center uk-button uk-button-primary"
                   style={{ backgroundColor: "#f07e1c" }}
                 >
                   Login
@@ -127,7 +127,9 @@ const Login = () => {
             </form>
           </div>
           <div className="uk-flex uk-flex-center uk-flex-middle uk-margin-large-left">
-           <span>New user? <Link to="/signup">Create an account</Link></span>
+            <span>
+              New user? <Link to="/signup">Create an account</Link>
+            </span>
           </div>
         </article>
       </BackgroundSection>

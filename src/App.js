@@ -10,7 +10,6 @@ function App() {
   const currentUser = useSelector((state) => state.session.currentUser);
 
   useEffect(() => {
-    console.log(currentUser);
     if (checkIfEmptyOject(currentUser)) {
       history.push("/login");
     } else {

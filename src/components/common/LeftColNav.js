@@ -1,7 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import avatar from "../../assets/Avatar.png";
 
 const LeftColNav = () => {
+  const currentUser = useSelector((state) => state.session.currentUser);
   return (
     <div id="leftMainCol" className="uk-width-medium">
       <div
