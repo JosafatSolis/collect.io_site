@@ -3,7 +3,6 @@ import { base_url } from './baseUrl';
 axios.defaults.withCredentials = true;
 
 export const getRecords = (params) => {
-    console.log(params);
     return axios.get(`${base_url}/records/`, {params});
 }
 

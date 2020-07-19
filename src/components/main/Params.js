@@ -34,12 +34,12 @@ const Params = () => {
   };
 
   useEffect(() => {
-    setParams((prevState) => ({ ...prevState, format: currentFormat._id }));
+    setParams((prevState) => ({ ...prevState, format: currentFormat._id, code: null }));
   }, [formatSelectRef, currentFormat._id]);
 
   const handleSubmit = async (e) => {
-    const codes = getSelectValues(codeSelectRef.current);
-    console.log(codes);
+    //const codes = getSelectValues(codeSelectRef.current);
+    //console.log(codes);
     let withDateParams = {...params};
     if (params.from) {
       const from = new Date(params.from);

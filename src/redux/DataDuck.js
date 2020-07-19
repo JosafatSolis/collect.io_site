@@ -39,7 +39,8 @@ export default function reducer(state = initState, action) {
       return { ...state, status: status.loading_data };
 
     case UPDATE_CURRENT_FORMAT:
-      return { ...state, currentFormat: state.userFormats[action.payload] };
+      console.log(state.userFormats[action.payload]);
+      return { ...state, currentFormat: state.userFormats[action.payload], data: {} };
 
     case GET_USER_FORMATS_SUCCESS:
       return {
