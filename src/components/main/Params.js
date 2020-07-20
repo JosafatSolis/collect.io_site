@@ -5,7 +5,7 @@ import {
   updateCurrentFormat,
   loadData,
 } from "../../redux/DataDuck";
-import { denormalizeArray, getSelectValues } from "../../utils/utils";
+import { denormalizeArray } from "../../utils/utils";
 
 const Params = () => {
   const { userFormats, currentFormat } = useSelector((state) => state.data);
@@ -47,10 +47,10 @@ const Params = () => {
     }
     dispatch(loadData(withDateParams));
   };
-
+  // uk-grid-divider
   return (
     <div id="paramsCell" className="uk-width-1-1">
-      <div id="paramsCellGrid" className="uk-grid-divider" uk-grid="true">
+      <div id="paramsCellGrid" className="" uk-grid="true">
         <div id="formatCell" className="uk-flex">
           <label>Format:</label>
           <select
