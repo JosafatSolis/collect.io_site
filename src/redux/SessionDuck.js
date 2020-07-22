@@ -1,10 +1,11 @@
 // Imports
-import { loginPost } from "../services/loginServices";
+import { loginPost, logoutPost } from "../services/loginServices";
 
 // Actions
 const LOGIN_SUCCESS = "collect.io/session/LOGIN_SUCCESS";
 const LOGIN_FAILED = "collect.io/session/LOGIN_FAILED";
 const CLEAR_ERROR_MSG = "collect.io/session/CLEAR_ERROR_MSG";
+const LOGOUT_SUCCESS = "collect.io/session/LOGOUT_SUCCESS";
 
 // State
 const initState = {
@@ -26,6 +27,10 @@ export default function reducer(state = initState, action) {
     case CLEAR_ERROR_MSG:
       return { ...state, errorMsg: null };
 
+    case LOGOUT_SUCCESS:
+      localStorage.clear();
+      return { currentUser: null, errorMsg: null }
+
     default:
       return state;
   }
@@ -46,6 +51,10 @@ export const clearErrorMsg = () => ({
   type: CLEAR_ERROR_MSG,
 });
 
+const logOutSuccess = () => ({
+  type: LOGOUT_SUCCESS
+})
+
 // Thunks
 export const login = (credentials) => {
   return (dispatch) => {
@@ -58,3 +67,11 @@ export const login = (credentials) => {
       });
   };
 };
+
+export const logout = () => {
+  return (dispatch) => {
+    logoutPost().then(response => {
+      dispatch(logOutSuccess());
+    }).catch(error => console.log("Logout error", error));
+  }
+}

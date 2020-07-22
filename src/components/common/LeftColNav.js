@@ -1,9 +1,11 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import avatar from "../../assets/Avatar.png";
+
+import whitelogo from "../../assets/whitelogo.png";
+
+
 
 const LeftColNav = () => {
-  const currentUser = useSelector((state) => state.session.currentUser);
+  
   return (
     <div id="leftMainCol" className="uk-width-medium">
       <div
@@ -11,10 +13,7 @@ const LeftColNav = () => {
         className="uk-grid-divider uk-card uk-card-default uk-card-body uk-padding-remove-right uk-height-1-1"
         uk-grid="true"
       >
-        <div id="logo">[Logo Collect.io]</div>
-        <div id="userInfo">
-          <img src={avatar} alt="avatar" /> Current User
-        </div>
+        <img id="logo" src={whitelogo} alt="logo" />
         <div id="navMenu">
           Nav Menu
           <ul>

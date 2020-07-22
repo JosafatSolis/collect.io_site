@@ -19,10 +19,15 @@ const ChartsContainer = () => {
   return (
     <div>
       {!checkIfEmptyOject(data) && (
-        <div>
-          <Line data={lineChartData} />
-          <Pie data={pieChartData}/>
-          <Bar data={barChartData} />
+        <div className="uk-child-width-expand@s uk-text-center uk-grid-small uk-grid-row-large" uk-grid="true">
+          <div style={{width: "400px"}}>
+            <Line data={lineChartData} />
+          </div>
+          <div style={{width: "400px"}}>
+            <Pie data={pieChartData} />
+          </div>
+
+          {/* <Bar data={barChartData} /> */}
         </div>
       )}
     </div>

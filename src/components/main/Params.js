@@ -34,13 +34,17 @@ const Params = () => {
   };
 
   useEffect(() => {
-    setParams((prevState) => ({ ...prevState, format: currentFormat._id, code: null }));
+    setParams((prevState) => ({
+      ...prevState,
+      format: currentFormat._id,
+      code: null,
+    }));
   }, [formatSelectRef, currentFormat._id]);
 
   const handleSubmit = async (e) => {
     //const codes = getSelectValues(codeSelectRef.current);
     //console.log(codes);
-    let withDateParams = {...params};
+    let withDateParams = { ...params };
     if (params.from) {
       const from = new Date(params.from);
       withDateParams = { ...params, from };
@@ -66,32 +70,46 @@ const Params = () => {
             ))}
           </select>
         </div>
-        <div id="codeCell" className="uk-form-controls">
+        <div id="codeCell" className="uk-form-controls uk-flex uk-flex-top">
           <label>Code:</label>
-          <select
-            multiple={true}
-            name="code"
-            ref={codeSelectRef}
-            onChange={handleChange}
-          >
-            {currentFormat.codes &&
-              currentFormat.codes.map((code) => (
-                <option key={code} value={code}>
-                  {code}
-                </option>
-              ))}
-          </select>
+          <div className="uk-flex uk-flex-right uk-flex-column">
+            <select
+              multiple={true}
+              name="code"
+              ref={codeSelectRef}
+              onChange={handleChange}
+              className="uk-select"
+            >
+              {currentFormat.codes &&
+                currentFormat.codes.map((code) => (
+                  <option key={code} value={code}>
+                    {code}
+                  </option>
+                ))}
+            </select>
+            <button class="uk-button uk-button-link uk-flex uk-flex-right">Clear</button> 
+          </div>
         </div>
         <div id="fromCell" className="uk-form-controls">
           <label>From:</label>
-          <input type="date" name="from" onChange={handleChange}></input>
+          <input
+            className="uk-input"
+            type="date"
+            name="from"
+            onChange={handleChange}
+          ></input>
         </div>
         <div id="toCell">
           <label>To:</label>
-          <input type="date" name="to" onChange={handleChange}></input>
+          <input
+            className="uk-input"
+            type="date"
+            name="to"
+            onChange={handleChange}
+          ></input>
         </div>
         <div id="updateButtonCell">
-          <button className="uk-button" onClick={handleSubmit}>
+          <button className="uk-button uk-button-large uk-button-primary" onClick={handleSubmit}>
             Update
           </button>
         </div>

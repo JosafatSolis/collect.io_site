@@ -1,4 +1,3 @@
- 
 import axios from 'axios';
 import { base_url } from './baseUrl';
 axios.defaults.withCredentials = true;
