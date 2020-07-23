@@ -6,11 +6,13 @@ const LOGIN_SUCCESS = "collect.io/session/LOGIN_SUCCESS";
 const LOGIN_FAILED = "collect.io/session/LOGIN_FAILED";
 const CLEAR_ERROR_MSG = "collect.io/session/CLEAR_ERROR_MSG";
 const LOGOUT_SUCCESS = "collect.io/session/LOGOUT_SUCCESS";
+const UPDATE_BREADCRUMB = "collect.io/session/UPDATE_BREADCRUMB";
 
 // State
 const initState = {
   currentUser: JSON.parse(localStorage.getItem("currentUser")) || {},
   errorMsg: null,
+  breadcrumbText: "View Data"
 };
 
 // Reducer
@@ -18,7 +20,7 @@ export default function reducer(state = initState, action) {
   switch (action.type) {
     case LOGIN_SUCCESS:
       localStorage.setItem("currentUser", JSON.stringify(action.payload));
-      return { ...state, currentUser: action.payload, errorMsg: null };
+      return { ...state, currentUser: action.payload, breadcrumbText: "View Data", errorMsg: null };
 
     case LOGIN_FAILED:
       localStorage.removeItem("currentUser");
@@ -30,6 +32,9 @@ export default function reducer(state = initState, action) {
     case LOGOUT_SUCCESS:
       localStorage.clear();
       return { currentUser: null, errorMsg: null }
+
+    case UPDATE_BREADCRUMB:
+      return { ...state, breadcrumbText: action.payload }
 
     default:
       return state;
@@ -53,6 +58,11 @@ export const clearErrorMsg = () => ({
 
 const logOutSuccess = () => ({
   type: LOGOUT_SUCCESS
+})
+
+export const updateBreadcrumb = (payload) => ({
+  type: UPDATE_BREADCRUMB,
+  payload
 })
 
 // Thunks

@@ -1,10 +1,10 @@
 import React from "react";
-import { Line, defaults, Pie, Bar } from "react-chartjs-2";
+import { Line, defaults, Pie } from "react-chartjs-2";
 import { useSelector } from "react-redux";
 import { checkIfEmptyOject } from "../../utils/utils";
 import lineChartDataGen from "../../utils/lineChartDataGen";
 import pieChartDataGen from "../../utils/pieChartDataGen";
-import barChartDataGen from "../../utils/barChartDataGen";
+//import barChartDataGen from "../../utils/barChartDataGen";
 
 defaults.global.pointStyle = "cross";
 
@@ -13,8 +13,7 @@ const ChartsContainer = () => {
 
   const lineChartData = lineChartDataGen(data);
   const pieChartData = pieChartDataGen(data);
-  const barChartData = barChartDataGen(data);
-  console.log(barChartData);
+  //const barChartData = barChartDataGen(data);
 
   return (
     <div>

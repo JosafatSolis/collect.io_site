@@ -8,9 +8,8 @@ const StatsContainer = () => {
   return (
     <div>
       {stats.length === 0 && (
-        <span>
-          <br />
-          <h2>Define filters and press UPDATE</h2>
+        <span >
+          <h2 className="uk-text-primary uk-text-center">Define filters and press UPDATE</h2>
         </span>
       )}
       {stats.length > 0 && (

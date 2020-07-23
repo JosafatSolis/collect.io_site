@@ -1,8 +1,7 @@
 import React from "react";
 import Breadcrumb from "../common/Breadcrumb";
-import Params from "./Params";
 import Footer from "../common/Footer";
-import ResultsSection from "./ResultsSection";
+import SectionContainer from "./SectionContainer";
 
 const MainRightCol = () => {
   return (
@@ -13,16 +12,7 @@ const MainRightCol = () => {
       >
         <div id="rightColCardGrid" className="uk-grid-divider" uk-grid="true">
           <Breadcrumb />
-          <div id="paramsAndContentCell" className="uk-width-1-1 uk-height-1-1">
-            <div
-              id="paramsAndContentCellGrid"
-              className="uk-grid-divider"
-              uk-grid="true"
-            >
-              <Params />
-              <ResultsSection />
-            </div>
-          </div>
+          <SectionContainer />
           <Footer />
         </div>
       </div>

@@ -54,7 +54,7 @@ const Params = () => {
   // uk-grid-divider
   return (
     <div id="paramsCell" className="uk-width-1-1">
-      <div id="paramsCellGrid" className="" uk-grid="true">
+      <div id="paramsCellGrid" className="uk-padding uk-padding-remove-top uk-padding-remove-right uk-padding-remove-bottom" uk-grid="true">
         <div id="formatCell" className="uk-flex">
           <label>Format:</label>
           <select
@@ -87,7 +87,7 @@ const Params = () => {
                   </option>
                 ))}
             </select>
-            <button class="uk-button uk-button-link uk-flex uk-flex-right">Clear</button> 
+            <button className="uk-button uk-button-link uk-flex uk-flex-right">Clear</button> 
           </div>
         </div>
         <div id="fromCell" className="uk-form-controls">

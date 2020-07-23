@@ -9,3 +9,7 @@ export const loginPost = (credentials) => {
 export const logoutPost = () => {
     return axios.post(`${base_url}/users/logout`);
 }
+
+export const signupPost = (user) => {
+    return axios.post(`${base_url}/users/signup`, user);
+}

@@ -13,7 +13,7 @@ function App() {
     if (checkIfEmptyOject(currentUser)) {
       history.push("/login");
     } else {
-      history.push("/home");
+      history.push("/home/adminformats");
     }
   });
 
