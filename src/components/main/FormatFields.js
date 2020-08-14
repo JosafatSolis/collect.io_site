@@ -1,7 +1,10 @@
 import React from "react";
-import TagField from "./TagField";
+import TagFields from "./TagFields";
 
-const FormatFields = () => {
+const FormatFields = ({format}) => {
+    const handleChange = (e) => {
+        // Do nothing
+    }
     return(
         <form className="uk-form-stacked" style={{minWidth: "250px", marginRight: "40px"}}>
               <div className="uk-margin">
@@ -19,6 +22,8 @@ const FormatFields = () => {
                     id="form-stacked-text"
                     type="text"
                     placeholder="Format Title..."
+                    value={format.title}
+                    onChange={handleChange}
                   />
                 </div>
               </div>
@@ -33,6 +38,8 @@ const FormatFields = () => {
                     id="form-stacked-text"
                     type="text"
                     placeholder="Main numeric field name..."
+                    value={format.mainNumericFieldName}
+                    onChange={handleChange}
                   />
                 </div>
               </div>
@@ -57,7 +64,7 @@ const FormatFields = () => {
                 </div>
                 <div className="uk-form-controls">
                   <select multiple={true} name="code" className="uk-select">
-                    {["A", "B", "C"].map((code) => (
+                    {format.codes.map((code) => (
                       <option key={code} value={code}>
                         {code}
                       </option>
@@ -71,16 +78,8 @@ const FormatFields = () => {
                 </div>
               </div>
 
-              <div
-                className="uk-card uk-card-default uk-card-body uk-padding-small"
-                style={{ margin: "-10px" }}
-              >
-                <span className="uk-text">Tag Fields</span>
-                <TagField />
-                <TagField />
-                <TagField />
-
-              </div>
+              <TagFields tagFields={format.tagFields}
+              fieldTypes={["Text", "Boolean", "Number", "Date"]} />
 
               <div className="uk-margin">
                 <div className="uk-form-controls uk-flex uk-flex-right">

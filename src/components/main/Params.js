@@ -5,19 +5,19 @@ import {
   updateCurrentFormat,
   loadData,
 } from "../../redux/DataDuck";
-import { denormalizeArray } from "../../utils/utils";
+import { denormalizeArray, clearSelectValues } from "../../utils/utils";
 
 const Params = () => {
   const { userFormats, currentFormat } = useSelector((state) => state.data);
 
   const formatSelectRef = useRef();
   const codeSelectRef = useRef();
+  const fromDateRef = useRef();
+  const toDateRef = useRef();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(loadUserFormats());
-    // ++++++ D U D A :
-    // ¿Cómo ejecutar algo después de que se haya ejecutado dispatch, una vez que se actualizó el estado? (Async)
   }, [dispatch]);
 
   const [params, setParams] = useState({});
@@ -30,7 +30,6 @@ const Params = () => {
       [key]: value,
     }));
     if (key === "format") dispatch(updateCurrentFormat(value));
-    console.log(params);
   };
 
   useEffect(() => {
@@ -51,7 +50,24 @@ const Params = () => {
     }
     dispatch(loadData(withDateParams));
   };
-  // uk-grid-divider
+  
+  const handleClearSelectClick = (e) => {
+    clearSelectValues(codeSelectRef.current);
+    setParams(prevState => ({...prevState, code: null}));
+  }
+
+  const handleClearFromClick = (e) => {
+    fromDateRef.current.valueAsDate = null;
+    const {from, ...remaining} = params;
+    setParams({...remaining});
+  }
+
+  const handleClearToClick = (e) => {
+    toDateRef.current.valueAsDate = null;
+    const {to, ...remaining} = params;
+    setParams({...remaining});
+  }
+
   return (
     <div id="paramsCell" className="uk-width-1-1">
       <div id="paramsCellGrid" className="uk-padding uk-padding-remove-top uk-padding-remove-right uk-padding-remove-bottom" uk-grid="true">
@@ -87,7 +103,7 @@ const Params = () => {
                   </option>
                 ))}
             </select>
-            <button className="uk-button uk-button-link uk-flex uk-flex-right">Clear</button> 
+            <button onClick={handleClearSelectClick} className="uk-button uk-button-link uk-flex uk-flex-right">Clear</button> 
           </div>
         </div>
         <div id="fromCell" className="uk-form-controls">
@@ -96,8 +112,10 @@ const Params = () => {
             className="uk-input"
             type="date"
             name="from"
+            ref={fromDateRef}
             onChange={handleChange}
           ></input>
+          <button onClick={handleClearFromClick} className="uk-button uk-button-link uk-width-1-1 uk-flex uk-flex-right">Clear</button> 
         </div>
         <div id="toCell">
           <label>To:</label>
@@ -105,8 +123,10 @@ const Params = () => {
             className="uk-input"
             type="date"
             name="to"
+            ref={toDateRef}
             onChange={handleChange}
           ></input>
+          <button onClick={handleClearToClick} className="uk-button uk-button-link uk-width-1-1 uk-flex uk-flex-right">Clear</button> 
         </div>
         <div id="updateButtonCell">
           <button className="uk-button uk-button-large uk-button-primary" onClick={handleSubmit}>

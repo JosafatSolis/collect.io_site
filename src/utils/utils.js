@@ -27,6 +27,13 @@ export const getSelectValues = (select) => {
   return result;
 };
 
+export const clearSelectValues = (select) => {
+  var options = select && select.options;
+  for (var i = 0; i < options.length; i++ ) {
+    options[i].selected = false;
+  }
+}
+
 // Receives a number and returns an array with that number of elements with letters like A...Z,AA...AZ....
 export const getArrayOfLetters = (topVal) => {
   let resp = [];

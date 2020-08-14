@@ -13,6 +13,7 @@ const GET_DATA_FAILED = "collect.io_site/data/GET_DATA_FAILED";
 // Sync
 const UPDATE_STATUS_LOADING = "collect.io_site/data/UPDATE_STATUS_LOADING";
 const UPDATE_CURRENT_FORMAT = "collect.io_site/data/UPDATE_CURRENT_FORMAT";
+const UPDATE_ADDING_NEW_FORMAT = "collect.io_site/data/UPDATE_ADDING_NEW_FORMAT";
 
 // State
 // Status available: new_query, loading_data, display_data
@@ -30,6 +31,7 @@ const initState = {
   currentFormat: {},
   status: status.new_query,
   error_msg: null,
+  addingNewFormat: false,
 };
 
 // Reducer
@@ -39,8 +41,12 @@ export default function reducer(state = initState, action) {
       return { ...state, status: status.loading_data };
 
     case UPDATE_CURRENT_FORMAT:
-      console.log(state.userFormats[action.payload]);
-      return { ...state, currentFormat: state.userFormats[action.payload], data: {} };
+      //console.log(state.userFormats[action.payload]);
+      return {
+        ...state,
+        currentFormat: state.userFormats[action.payload],
+        data: {},
+      };
 
     case GET_USER_FORMATS_SUCCESS:
       return {
@@ -60,7 +66,7 @@ export default function reducer(state = initState, action) {
       };
 
     case GET_DATA_SUCCESS:
-      console.log(action.payload);
+      //console.log(action.payload);
       return {
         ...state,
         data: action.payload,
@@ -75,6 +81,9 @@ export default function reducer(state = initState, action) {
         status: status.error,
         error_msg: action.payload,
       };
+
+    case UPDATE_ADDING_NEW_FORMAT:
+      return { ...state, addingNewFormat: action.payload };
 
     default:
       return state;
@@ -110,6 +119,19 @@ const getDataFailed = (payload) => ({
   type: GET_DATA_FAILED,
   payload,
 });
+
+const updateAddingNewFormat = (payload) => ({
+  type: UPDATE_ADDING_NEW_FORMAT,
+  payload,
+});
+
+// Custom Actions
+export const startNewProduct = () => {
+  return (dispatch) => {
+    dispatch(updateAddingNewFormat(true));
+    dispatch()
+  }
+}
 
 // Thunks
 // User id is not required because backend extracts it from Token

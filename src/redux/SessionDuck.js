@@ -12,7 +12,7 @@ const UPDATE_BREADCRUMB = "collect.io/session/UPDATE_BREADCRUMB";
 const initState = {
   currentUser: JSON.parse(localStorage.getItem("currentUser")) || {},
   errorMsg: null,
-  breadcrumbText: "View Data"
+  breadcrumbText: "View Data",
 };
 
 // Reducer
@@ -20,7 +20,12 @@ export default function reducer(state = initState, action) {
   switch (action.type) {
     case LOGIN_SUCCESS:
       localStorage.setItem("currentUser", JSON.stringify(action.payload));
-      return { ...state, currentUser: action.payload, breadcrumbText: "View Data", errorMsg: null };
+      return {
+        ...state,
+        currentUser: action.payload,
+        breadcrumbText: "View Data",
+        errorMsg: null,
+      };
 
     case LOGIN_FAILED:
       localStorage.removeItem("currentUser");
@@ -31,10 +36,10 @@ export default function reducer(state = initState, action) {
 
     case LOGOUT_SUCCESS:
       localStorage.clear();
-      return { currentUser: null, errorMsg: null }
+      return { currentUser: null, errorMsg: null };
 
     case UPDATE_BREADCRUMB:
-      return { ...state, breadcrumbText: action.payload }
+      return { ...state, breadcrumbText: action.payload };
 
     default:
       return state;
@@ -57,13 +62,13 @@ export const clearErrorMsg = () => ({
 });
 
 const logOutSuccess = () => ({
-  type: LOGOUT_SUCCESS
-})
+  type: LOGOUT_SUCCESS,
+});
 
 export const updateBreadcrumb = (payload) => ({
   type: UPDATE_BREADCRUMB,
-  payload
-})
+  payload,
+});
 
 // Thunks
 export const login = (credentials) => {
@@ -80,8 +85,10 @@ export const login = (credentials) => {
 
 export const logout = () => {
   return (dispatch) => {
-    logoutPost().then(response => {
-      dispatch(logOutSuccess());
-    }).catch(error => console.log("Logout error", error));
-  }
-}
+    logoutPost()
+      .then((response) => {
+        dispatch(logOutSuccess());
+      })
+      .catch((error) => console.log("Logout error", error));
+  };
+};
